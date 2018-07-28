@@ -1,0 +1,21 @@
+autotools examples
+------------------
+
+I am working on an autotools based project now and am having some trouble
+finding good tutorials on how to set up projects. My goals here are to create a
+sequence of increasingly complex autotools projects that:
+1. are portable
+2. make minimal use of make and, instead, rely heavily on automake
+3. make minimal use of shell scripts or m4 written by hand
+4. avoid recursive make: everything should be in =configure.ac= or =Makefile.am=
+   in the top directory.
+
+
+automake and libtool can handle most of the hard stuff, but I have not found
+good examples of complicated setups.
+
+The goal is to ultimately write a tutorial that shows how to do the following:
+1. compile multiple libraries (via libtool) which may link to eachother
+2. manage multiple external dependencies, each of which may be versioned
+3. compile multiple executables (tutorial programs)
+4. compile and run a test suite (with the provided autotools test harness)
