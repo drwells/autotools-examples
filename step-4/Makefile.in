@@ -410,7 +410,7 @@ AM_CXXFLAGS = -I$(top_srcdir)/include/
 
 # this part is new: we need to instruct automake how to use zlib. Note that,
 # formally, the include directories are fed to the C preprocessor (not something
-# we usually think about)
+# we usually think about) so these should be added to CPPFLAGS.
 libhelloint_la_CPPFLAGS = $(ZLIB_CFLAGS)
 libhelloint_la_LDFLAGS = $(ZLIB_LIBS)
 all: all-am

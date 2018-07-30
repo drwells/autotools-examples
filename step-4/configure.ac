@@ -15,7 +15,8 @@ AC_PROG_CXXCPP
 # link against and headers to include.
 #
 # One way to solve this is pkg-config; however, this is not completely portable
-# without issues, so we use something built in to autotools instead.
+# without issues (i.e., not all platforms will install the .pc files for each
+# installed library), so we use something built in to autotools instead.
 #
 # The first check verifies that the header describing the external library is
 # visible. The second argument is run if we can find the header.
@@ -31,12 +32,15 @@ fi
 #
 # AC_CHECK_LIB prepends "-lz" (or equivalent on another platform) to LIBS. This
 # is not quite what we want: we would prefer to only link things that depend on
-# zlib on zlib (instead of trying to link *everything* against it). Hence we
+# zlib to zlib (instead of trying to link *everything* against it). Hence we
 # clear LIBS and reset it after calling this function.
 #
-# The other thing this macro does is set
+# The other thing this macro does (if it succeeds) is define HAVE_LIBZ: we won't
+# use this here.
 _old_libs=$LIBS
 LIBS=""
+# AC_CHECK_LIB requires the name of a symbol in the library. In this case we
+# check for compress2.
 AC_CHECK_LIB(z, compress2)
 if test "$LIBS" != ""; then # we must have found something
     AC_MSG_RESULT(Found libz)
@@ -46,6 +50,7 @@ fi
 ZLIB_LIBS=$LIBS
 LIBS=$_old_libs
 
+# Finally, we export ZLIB_LIBS to the makefile:
 AC_SUBST(ZLIB_LIBS, [$ZLIB_LIBS])
 
 AC_CONFIG_FILES([Makefile])
