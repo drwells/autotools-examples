@@ -3295,7 +3295,11 @@ ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 ac_config_files="$ac_config_files Makefile"
 
 
-# Save all the output.
+echo "autotools makeflags is "
+echo $AM_CPPFLAGS
+
+# Actually write all generated files (in this case, just Makefile, declared
+# above)
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
